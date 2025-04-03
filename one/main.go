@@ -8,9 +8,7 @@ import (
 	"strings"
 )
 
-func partOne() {
-	fmt.Println("aoc #1")
-
+func readInput() []int {
 	input, err := os.Open("input.txt")
 	if err != nil {
 		panic(err)
@@ -25,15 +23,26 @@ func partOne() {
 		if line == "" {
 			break
 		}
+
 		number, e := strconv.Atoi(line)
 		if e != nil {
 			panic(e)
 		}
+
 		inputs = append(inputs, number)
 		if err != nil {
 			break
 		}
 	}
+	defer input.Close()
+
+	return inputs
+}
+
+func partOne() {
+	fmt.Println("aoc #1a")
+
+	var inputs []int = readInput()
 
 	var sum int64
 	for i := range inputs {
@@ -41,7 +50,6 @@ func partOne() {
 	}
 
 	fmt.Println(sum)
-	defer input.Close()
 }
 
 func main() {
